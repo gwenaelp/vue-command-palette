@@ -10,7 +10,7 @@
         @keydown.down="downKey"
         @keydown.up="upKey"
         @keyup.esc="hide"
-        @keyup.enter="$emit('selectChoice', choices[focusedChoiceIndex])"
+        @keyup.enter="selectChoice"
       />
       <div ref="choices" class="commandpalette-choices">
         <div v-for="(c, index) in displayedChoices" :class="{
@@ -127,6 +127,10 @@ export default {
       if (this.focusedChoiceIndex < this.displayedChoices.length - 1) {
         this.focusedChoiceIndex++;
       }
+    },
+    selectChoice() {
+      this.$emit('selectChoice', this.choices[this.focusedChoiceIndex]);
+      this.hide();
     }
   }
 };
