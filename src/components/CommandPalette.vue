@@ -95,11 +95,13 @@ export default {
       handler() {
         this.$nextTick(() => {
           const choicesEl = this.$refs.choices;
-          const focusedEl = choicesEl.querySelector('.focused');
-          if (choicesEl.scrollTop > focusedEl.offsetTop - this.$refs.searchInput.offsetHeight - 9) {
-            choicesEl.scrollTo(0, focusedEl.offsetTop - this.$refs.searchInput.offsetHeight - 9);
-          } else if (choicesEl.scrollTop + choicesEl.offsetHeight < focusedEl.offsetTop + focusedEl.offsetHeight - 8) {
-            choicesEl.scrollTo(0, focusedEl.offsetTop - choicesEl.offsetHeight - 8);
+          if (choicesEl && choicesEl.querySelector) {
+            const focusedEl = choicesEl.querySelector('.focused');
+            if (choicesEl.scrollTop > focusedEl.offsetTop - this.$refs.searchInput.offsetHeight - 9) {
+              choicesEl.scrollTo(0, focusedEl.offsetTop - this.$refs.searchInput.offsetHeight - 9);
+            } else if (choicesEl.scrollTop + choicesEl.offsetHeight < focusedEl.offsetTop + focusedEl.offsetHeight - 8) {
+              choicesEl.scrollTo(0, focusedEl.offsetTop - choicesEl.offsetHeight - 8);
+            }
           }
         });
       },
