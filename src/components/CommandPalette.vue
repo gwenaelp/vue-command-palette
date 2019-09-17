@@ -44,6 +44,14 @@ export default {
     keys: {
       type: Array,
       default: () => [ 'label' ]
+    },
+    showKeyBinding: {
+      type: String,
+      default: 'ctrl+p'
+    },
+    hideKeyBinding: {
+      type: String,
+      default: 'esc'
     }
   },
   data() {
@@ -59,7 +67,7 @@ export default {
     };
   },
   mounted() {
-    mousetrap.bind('ctrl+p', () => {
+    mousetrap.bind(this.showKeyBinding, () => {
       this.show();
       return false;
     });
@@ -68,9 +76,9 @@ export default {
     visible: {
       handler(v) {
         if (v) {
-          mousetrap.bind('esc', this.hide.bind(this));
+          mousetrap.bind(this.hideKeyBinding, this.hide.bind(this));
         } else {
-          mousetrap.unbind('esc');
+          mousetrap.unbind(this.hideKeyBinding);
         }
       },
       immediate: true
